@@ -1,6 +1,6 @@
 version: '3'
 services:
-  nuxt:
+  next:
     build: 
       context: .
       dockerfile: ./NodeDockerFile
@@ -14,5 +14,8 @@ services:
     volumes:
       - ../Source/app:/app
     tty: true
+# node_modules ディレクトリはNodeJS系PJのライブラリファイル等を格納するディレクトリとなっているが、
+# 当ディレクトリはReadWriteが非常に多い大きい為、Dockerを使用する上でパフォーマンス悪化の原因となる可能性がある。
+# そのため、環境パフォーマンス問題が顕在化してきた場合に備え volume trick を使用した当ディレクトリのホストへのReadWriteをさせない実装を残しておく。
 # volumes:
 #   node_modules:
